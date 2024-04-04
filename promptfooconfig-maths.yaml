@@ -1,7 +1,7 @@
 description: Promptfoo demo
 
 prompts:
-  - "Why what is 2+{{ topic }}?"
+  - "What is 2+{{ topic }}?"
 
 providers:
   - ollama:completion:llama2
@@ -12,8 +12,8 @@ defaultTest:
         - role: system
           content: >-
             Expected Answer: {{x}}
-            Does the Output match the expected answer? It does not matter if the expected answer is factually incorrect.
-            If the output matches the expected answer set score to 1. If the output dies not match the expected answer, set the score to 0.
+            Does the Output match the intent of the expected answer? It does not matter if the expected answer is factually incorrect.
+            If the output matches the expected answer set score to 1. If the output does not match the expected answer, set the score to 0.
             If score is 1 then set pass to true. If score is 0 then set pass to false. 
             Output your a valid JSON response in the format as follows
             {pass: boolean, score: number, reason: string}
@@ -22,19 +22,25 @@ defaultTest:
 
 tests:
   - vars:
-      topic: 3
-      x: 5
+      topic: '3'
+      x: '5'
     assert:
       - type: llm-rubric
 
   - vars:
-      topic: 4
-      x:  4
+      topic: '4'
+      x: The answer to 2+4 is 6
     assert:
       - type: llm-rubric
 
   - vars:
-      topic: 5
-      x: 5
+      topic: '5'
+      x: '2+5=7'
+    assert:
+      - type: llm-rubric
+  
+  - vars:
+      topic: '5'
+      x: '2 + 5 = 25'
     assert:
       - type: llm-rubric
