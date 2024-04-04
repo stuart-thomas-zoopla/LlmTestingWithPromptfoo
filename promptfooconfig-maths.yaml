@@ -1,0 +1,40 @@
+description: Promptfoo demo
+
+prompts:
+  - "Why what is 2+{{ topic }}?"
+
+providers:
+  - ollama:completion:llama2
+defaultTest:
+  options:
+    provider: ollama:completion:llama2
+    rubricPrompt:
+        - role: system
+          content: >-
+            Expected Answer: {{x}}
+            Does the Output match the expected answer? It does not matter if the expected answer is factually incorrect.
+            If the output matches the expected answer set score to 1. If the output dies not match the expected answer, set the score to 0.
+            If score is 1 then set pass to true. If score is 0 then set pass to false. 
+            Output your a valid JSON response in the format as follows
+            {pass: boolean, score: number, reason: string}
+        - role: user
+          content: 'Output: {{ output }}'
+
+tests:
+  - vars:
+      topic: 3
+      x: 5
+    assert:
+      - type: llm-rubric
+
+  - vars:
+      topic: 4
+      x:  4
+    assert:
+      - type: llm-rubric
+
+  - vars:
+      topic: 5
+      x: 5
+    assert:
+      - type: llm-rubric
