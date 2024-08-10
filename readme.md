@@ -1,5 +1,5 @@
 # LLM Testing with Promptfoo
-This repository contains an example Promptfoo test framework for using the Ollama API to interact with and test the Meta Llama2 LLM. You can read the associated blog post on [The Quality Duck](https://insertlinkhere.com) website.
+This repository contains an example Promptfoo test framework for using the Ollama API to interact with and test the Meta Llama2 LLM. You can read the associated blog post on [The Quality Duck](https://www.thequalityduck.co.uk/how-to-automate-your-prompt-engineering-matrix-with-promptfoo/) website.
 
 ## Running the tests
 
